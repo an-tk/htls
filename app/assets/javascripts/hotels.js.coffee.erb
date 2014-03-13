@@ -1,0 +1,10 @@
+$.fn.raty.defaults.path = '<%= asset_path 'assets/raty' %>';
+$(document).ready ->
+    rating = $('#rating')
+    rating.raty
+        scoreName: rating.data('name')
+        score: rating.data('score')
+    $('.raty-rating').each ->
+        $(this).raty
+            readOnly: true
+            score: $(this).data('score')

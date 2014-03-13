@@ -1,0 +1,67 @@
+.row
+  %h1= @hotel.title
+  .col-md-3
+    =image_tag @hotel.logo.url(:thumb), class: "img-thumbnail pull-left"
+  .col-md-9
+    %p
+      Stars rating:
+      - @hotel.stars.times do
+        %span.glyphicon.glyphicon-star
+
+    - if @hotel.breakfast_included
+      %p.bg-success Breakfast included
+    -else
+      %p.bg-danger No breakfast included:
+    -if @hotel.address.present?
+      .panel.panel-default
+        .panel-heading
+          %b Address
+        .panel-body
+          =@hotel.full_address
+
+
+    -if @hotel.description.present?
+      .panel.panel-default
+        .panel-heading
+          %b Description
+        .panel-body
+          =@hotel.description
+
+    -if @hotel.price.present?
+      .panel.panel-default
+        .panel-heading
+          %b Price
+        .panel-body
+          = @hotel.price.to_s
+          $
+
+  - if owner?(@hotel, current_user)
+    = link_to 'Edit', edit_hotel_path(@hotel)
+
+
+-if user_signed_in?
+  .well
+    %h4 Your rating
+    = simple_form_for @rating do |f|
+      #rating{data: {name: 'rating[score]', score: @rating.new_record? ? 0 : @rating.score }}
+      =f.input :comment
+      =f.hidden_field :hotel_id
+      =f.submit
+      - unless @rating.new_record?
+        =link_to 'Destroy', rating_path(@rating), :method => :delete
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-md-4
+        %b All user ratings
+      .col-md-8
+        AVG:
+        .raty-rating{data: {score: @hotel.avg_rating}}
+  .panel-body
+    -@hotel.ratings.each do |rating|
+      -unless rating.new_record?
+        .well.well-sm
+          %b=rating.user.email + ':'
+          .raty-rating{data: {score: rating.score}}
+          =rating.comment
+

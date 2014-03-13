@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %title Rails Bootstrap
+    = stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    .container
+      .row
+        .col-md-2
+          = link_to image_tag("logo.jpg", height: 50), root_path, title: 'Main page'
+        .col-md-10
+          -if user_signed_in?
+            Welcome:
+            %b= current_user.email
+            = link_to "Logout", destroy_user_session_path, :method => 'delete'
+          -else
+            = link_to "Login", new_user_session_path
+            |
+            = link_to "Register", new_registration_path(:user)
+
+
+      .row
+        = flash_messages
+        = yield

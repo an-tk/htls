@@ -1,0 +1,10 @@
+
+%h1 Listing hotels
+-if user_signed_in?
+  =link_to('New Hotel', new_hotel_path)
+
+-@hotels.each do |hotel|
+  .list-group
+    =render hotel
+= paginate @hotels
+

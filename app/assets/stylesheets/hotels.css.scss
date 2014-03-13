@@ -1,0 +1,18 @@
+// Place all the styles related to the Hotels controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+p {
+  padding: 10px
+}
+.list-group-item {
+  overflow: hidden
+}
+a:hover * {
+  color: cadetblue
+}
+.img-thumbnail {
+  margin-right: 10px
+}
+#hotel_address_attributes_country {
+  display: block;
+}

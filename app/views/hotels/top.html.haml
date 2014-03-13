@@ -1,0 +1,9 @@
+%h1 Best hotels
+-if user_signed_in?
+  =link_to('View  all hotels', hotels_path)
+
+-@hotels.each do |hotel|
+  .list-group
+    =render hotel
+
+

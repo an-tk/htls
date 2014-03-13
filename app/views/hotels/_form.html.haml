@@ -1,0 +1,16 @@
+.row
+  .col-md-6
+    = simple_form_for @hotel do |f|
+      = f.input :title
+      = f.input :logo
+      = f.input :stars
+      = f.input :breakfast_included
+      = f.input :description
+      = f.input :price
+      = f.simple_fields_for  :address, f.object.build_address do |a|
+        = a.input :country, :required => false, input_html: {class: 'form-control'}
+        = a.input :state, :required => false
+        = a.input :city, :required => false
+        = a.input :street
+      = f.button :submit
+

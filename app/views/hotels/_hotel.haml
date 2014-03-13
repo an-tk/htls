@@ -1,0 +1,12 @@
+=link_to hotel_path(hotel), class:'list-group-item' do
+  .col-md-4
+    =image_tag(hotel.logo.url(:thumb), class:'pull-left img-thumbnail')
+    %h3=hotel.title
+    %p
+      Stars
+      - hotel.stars.times do
+        %span.glyphicon.glyphicon-star
+  .col-md-8
+    %p
+      Avg users rating:
+      .raty-rating{data: {score: hotel.avg_rating}}
