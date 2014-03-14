@@ -16,7 +16,7 @@ class Hotel < ActiveRecord::Base
 
   validates :title, presence: true
   validates :stars, presence: true, inclusion: { in: 1..7, message: "%{value} is not valid. Should be in range 1..7" } #TODO move message to locale file
-  validates :price, numericality: { only_integer: true }
+  validates :price, numericality: { only_integer: true }, allow_blank: true
 
 
   def full_address
